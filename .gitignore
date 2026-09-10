@@ -1,0 +1,15 @@
+# Azure Functions: credenciales y configuración local (NUNCA subir)
+local.settings.json
+
+# Build de .NET
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

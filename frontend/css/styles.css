@@ -1,0 +1,284 @@
+/*
+  Tienda Johnny117 -- estilos generales.
+
+  Antes, casi todos los estilos venían como atributos style="" sueltos
+  repetidos en cada botón/input del HTML, más un bloque <style> chico al
+  final. Aquí se centraliza todo en un solo lugar con un sistema de
+  colores, tipografía y componentes (botones, tarjetas, formularios)
+  reutilizables.
+*/
+
+:root {
+  --color-primary: #1976d2;
+  --color-primary-dark: #125ea3;
+  --color-success: #2e7d32;
+  --color-success-dark: #1b5e20;
+  --color-danger: #c62828;
+  --color-danger-dark: #8e1c1c;
+  --color-bg: #f4f6f9;
+  --color-card: #ffffff;
+  --color-border: #e0e0e0;
+  --color-text: #202124;
+  --color-text-muted: #5f6368;
+  --radius: 10px;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* --- Encabezado de marca --- */
+.brand-header {
+  text-align: center;
+  padding: 28px 16px 18px 16px;
+}
+
+.brand-header h1 {
+  color: var(--color-primary);
+  margin: 0 0 6px 0;
+  font-size: 26px;
+}
+
+.brand-header p {
+  color: var(--color-text-muted);
+  margin: 0;
+  font-size: 14px;
+}
+
+/* --- Paneles / tarjetas de formulario --- */
+.form-panel {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 22px;
+  margin: 18px auto;
+  width: 340px;
+  max-width: 92vw;
+}
+
+.form-panel h2 {
+  text-align: center;
+  color: var(--color-primary);
+  margin: 0 0 18px 0;
+  font-size: 19px;
+}
+
+.form-panel label,
+.form-panel .field-label {
+  display: block;
+  margin: 0 0 6px 0;
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.form-panel input[type="text"],
+.form-panel input[type="email"],
+.form-panel input[type="password"],
+.form-panel input[type="number"],
+.form-panel input[type="datetime-local"],
+.form-panel select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.form-panel input:focus,
+.form-panel select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+/* --- Botones --- */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 11px 0;
+  margin: 8px 0 0 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+  text-align: center;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn-success {
+  background: var(--color-success);
+  color: #fff;
+}
+.btn-success:hover {
+  background: var(--color-success-dark);
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+.btn-danger:hover {
+  background: var(--color-danger-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+.btn-secondary:hover {
+  background: #f0f0f0;
+}
+
+.btn-inline {
+  width: auto;
+  display: inline-block;
+  padding: 9px 16px;
+  margin: 0 0 0 8px;
+}
+
+/* --- Foto de perfil / artículo --- */
+.photo-preview {
+  display: block;
+  margin: 4px auto 10px auto;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  object-fit: cover;
+}
+
+.file-hint {
+  color: var(--color-danger);
+  font-size: 12px;
+  display: none;
+}
+
+/* --- Menú principal --- */
+#menu .btn {
+  margin-top: 10px;
+}
+
+/* --- Búsqueda de artículos --- */
+.search-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.search-row input {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+.search-row .btn {
+  width: auto;
+  margin-top: 0;
+  padding: 10px 16px;
+}
+
+/* --- Tarjetas de artículo / carrito --- */
+.article-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #fafbfc;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.article-card img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #eee;
+}
+
+.article-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.article-info .article-name {
+  font-weight: 700;
+  color: var(--color-text);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.article-info .article-desc {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.article-info .article-price {
+  font-size: 13px;
+  color: var(--color-text);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.article-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.article-actions input[type="number"] {
+  width: 56px;
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.article-actions .btn {
+  width: auto;
+  margin: 0;
+  padding: 7px 12px;
+  font-size: 13px;
+}
+
+.cart-total {
+  text-align: right;
+  font-size: 16px;
+  padding: 8px 4px;
+  border-top: 2px solid var(--color-border);
+  margin-bottom: 12px;
+}
+
+.empty-state {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 20px 0;
+  font-style: italic;
+}

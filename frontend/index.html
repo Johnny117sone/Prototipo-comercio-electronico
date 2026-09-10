@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="author" content="Carlos Pineda Guerrero, septiembre 2024 (framework WSClient.js)">
+    <title>Tienda Johnny117</title>
+    <link rel="stylesheet" href="/api/Get?nombre=/css/styles.css">
+    <script src="/api/Get?nombre=/js/WSClient.js"></script>
+    <script src="/api/Get?nombre=/js/app.js"></script>
+</head>
+
+<body>
+
+    <!-- Alta de Usuario -->
+    <div id="alta_usuario" style="display:none" class="form-panel">
+        <h2>Alta de usuario</h2>
+        <span class="field-label">Email *</span>
+        <input type="email" id="alta_email" value="" />
+        <span class="field-label">Nombre *</span>
+        <input type="text" id="alta_nombre" value="" />
+        <span class="field-label">Apellido paterno *</span>
+        <input type="text" id="alta_apellido_paterno" value="" />
+        <span class="field-label">Apellido materno</span>
+        <input type="text" id="alta_apellido_materno" value="" />
+        <span class="field-label">Fecha de nacimiento *</span>
+        <input type="datetime-local" id="alta_fecha_nacimiento" value="" />
+        <span class="field-label">Teléfono</span>
+        <input type="number" id="alta_telefono" value="" />
+        <span class="field-label">Género</span>
+        <select id="alta_genero">
+            <option></option>
+            <option>Masculino</option>
+            <option>Femenino</option>
+        </select>
+        <span class="field-label">Contraseña *</span>
+        <input type="password" id="alta_password" value="" />
+
+        <img id="alta_imagen" class="photo-preview" width="90" height="90" src="/api/Get?nombre=/img/usuario_sin_foto.png" alt="Foto de perfil">
+        <input type="file" onchange="readSingleFile(this.files,get('alta_imagen'))" accept="image/*" />
+        <br><br>
+        <button type="button" class="btn btn-primary" onclick="alta()">Agregar usuario</button>
+        <button type="button" class="btn btn-secondary" onclick="limpia_alta()">Limpiar pantalla</button>
+        <button type="button" class="btn btn-secondary" onclick="oculta_pantalla('alta_usuario')">Regresar</button>
+    </div>
+
+    <!-- Consulta / Modificación de Usuario -->
+    <div id="consulta_usuario" style="display:none" class="form-panel">
+        <div id="encabezado_consulta">
+            <h2>Consulta usuario</h2>
+        </div>
+        <div id="encabezado_modifica" style="display:none">
+            <h2>Modifica usuario</h2>
+        </div>
+
+        <span class="field-label">Email *</span>
+        <input type="email" id="consulta_email" value="" />
+
+        <div id="modifica_usuario" style="display:none">
+            <span class="field-label">Nombre *</span>
+            <input type="text" id="consulta_nombre" value="" />
+            <span class="field-label">Apellido paterno *</span>
+            <input type="text" id="consulta_apellido_paterno" value="" />
+            <span class="field-label">Apellido materno</span>
+            <input type="text" id="consulta_apellido_materno" value="" />
+            <span class="field-label">Fecha de nacimiento *</span>
+            <input type="datetime-local" id="consulta_fecha_nacimiento" value="" />
+            <span class="field-label">Teléfono</span>
+            <input type="number" id="consulta_telefono" value="" />
+            <span class="field-label">Género</span>
+            <select id="consulta_genero">
+                <option></option>
+                <option>Masculino</option>
+                <option>Femenino</option>
+            </select>
+            <span class="field-label">Contraseña</span>
+            <input type="password" id="consulta_password" value="" />
+
+            <img id="consulta_imagen" class="photo-preview" width="90" height="90" src="/api/Get?nombre=/img/usuario_sin_foto.png" alt="Foto de perfil">
+            <input type="file" id="consulta_file" onchange="readSingleFile(this.files,get('consulta_imagen'))" accept="image/*" />
+            <button type="button" class="btn btn-secondary btn-inline" onclick="quita_foto()">Quitar foto</button>
+            <br><br>
+            <button type="button" class="btn btn-primary" onclick="modifica()">Guardar cambios</button>
+        </div>
+
+        <div id="boton_consulta">
+            <button type="button" class="btn btn-primary" onclick="consulta()">Buscar usuario</button>
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="cierra_pantalla_consulta()">Regresar</button>
+    </div>
+
+    <!-- Baja de Usuario -->
+    <div id="borra_usuario" style="display:none" class="form-panel">
+        <h2>Borra usuario</h2>
+        <span class="field-label">Email *</span>
+        <input type="email" id="borra_email" value="" />
+        <br>
+        <button type="button" class="btn btn-danger" onclick="borra()">Borrar usuario</button>
+        <button type="button" class="btn btn-secondary" onclick="oculta_pantalla('borra_usuario')">Regresar</button>
+    </div>
+
+    <!-- Login -->
+    <div id="login" style="display:none" class="form-panel">
+        <h2>Iniciar sesión</h2>
+        <span class="field-label">Email</span>
+        <input type="email" id="login_email" />
+        <span class="field-label">Contraseña</span>
+        <input type="password" id="login_password" />
+        <br>
+        <button type="button" class="btn btn-primary" onclick="login()">Aceptar</button>
+        <button type="button" class="btn btn-secondary" onclick="oculta_pantalla('login')">Cancelar</button>
+    </div>
+
+    <!-- Alta de artículo -->
+    <div id="alta_articulo" class="form-panel" style="display:none">
+        <h2>Captura de artículo</h2>
+        <span class="field-label">Nombre *</span>
+        <input type="text" id="articulo_nombre" />
+        <span class="field-label">Descripción</span>
+        <input type="text" id="articulo_descripcion" />
+        <span class="field-label">Precio *</span>
+        <input type="number" id="articulo_precio" step="0.01" />
+        <span class="field-label">Cantidad *</span>
+        <input type="number" id="articulo_cantidad" />
+
+        <span class="field-label">Imagen</span>
+        <img id="articulo_imagen" class="photo-preview" width="90" height="90" src="/api/Get?nombre=/img/usuario_sin_foto.png" alt="Foto del artículo">
+        <input type="file" onchange="readSingleFileArticulo(this.files, get('articulo_imagen'))" accept="image/*" />
+        <small id="msg_foto_articulo" class="file-hint">Debes seleccionar una imagen</small>
+        <br><br>
+        <button type="button" class="btn btn-primary" onclick="altaArticulo()">Agregar artículo</button>
+        <button type="button" class="btn btn-secondary" onclick="limpia_alta_articulo()">Limpiar pantalla</button>
+        <button type="button" class="btn btn-secondary" onclick="oculta_pantalla('alta_articulo')">Regresar</button>
+    </div>
+
+    <!-- Compra de artículos -->
+    <div id="compra_articulos" style="display:none" class="form-panel">
+        <h2>Compra de artículos</h2>
+        <div class="search-row">
+            <input type="text" id="busqueda_palabra" placeholder="Buscar por palabra clave..." />
+            <button type="button" class="btn btn-primary" onclick="buscarArticulos()">Buscar</button>
+        </div>
+        <div id="resultados_articulos"></div>
+        <button type="button" class="btn btn-success" onclick="verCarrito()">🛒 Ver carrito</button>
+        <button type="button" class="btn btn-secondary" onclick="oculta_pantalla('compra_articulos')">Regresar al menú</button>
+    </div>
+
+    <!-- Carrito -->
+    <div id="carrito" style="display:none" class="form-panel">
+        <h2>Artículos en el carrito</h2>
+        <div id="contenido_carrito"></div>
+    </div>
+
+    <!-- Menú principal -->
+    <div id="menu" class="form-panel">
+        <div class="brand-header" style="padding:0 0 10px 0">
+            <h1>Tienda Johnny117</h1>
+            <p>¡Tu espacio digital para comprar fácil, rápido y seguro!</p>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="limpia_alta();muestra_pantalla('alta_usuario')">Alta usuario</button>
+        <button type="button" class="btn btn-primary" onclick="limpia_consulta();muestra_pantalla('consulta_usuario')">Consulta usuario</button>
+        <button type="button" class="btn btn-danger" onclick="limpia_borra();muestra_pantalla('borra_usuario')">Borra usuario</button>
+        <button type="button" class="btn btn-primary" onclick="muestra_login('alta_articulo')">Captura de artículo</button>
+        <button type="button" class="btn btn-success" onclick="muestra_login('compra_articulos')">Compra de artículos</button>
+    </div>
+
+</body>
+
+</html>

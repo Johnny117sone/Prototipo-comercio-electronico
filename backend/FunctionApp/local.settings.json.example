@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "Server": "localhost",
+    "UserID": "tu_usuario_mysql",
+    "Password": "tu_password_mysql",
+    "Database": "servicio_web",
+    "ROOT": "../../frontend"
+  }
+}
